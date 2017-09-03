@@ -32,7 +32,7 @@ class VOCSegDataLayer(caffe.Layer):
             split="val")
         """
         # config
-        params = eval(self.param_str)
+        params = eval(self.param_str) #change str to list, dict or tuple
         self.voc_dir = params['voc_dir']
         self.split = params['split']
         self.mean = np.array(params['mean'])
