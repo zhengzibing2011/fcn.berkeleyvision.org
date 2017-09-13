@@ -36,7 +36,7 @@ class VOCSegDataLayer(caffe.Layer):
         self.voc_dir = params['voc_dir']
         self.split = params['split']
         self.mean = np.array(params['mean'])
-        self.random = params.get('randomize', True) #dict.get(key,default=None):return the specified key's value of 
+        self.random = params.get('randomize', True) #dict.get(key,default=None):return the specified key's value, if not included in the dict, return default.
         self.seed = params.get('seed', None)
 
         # two tops: data and label
@@ -59,7 +59,7 @@ class VOCSegDataLayer(caffe.Layer):
         # randomization: seed and pick
         if self.random:
             random.seed(self.seed)
-            self.idx = random.randint(0, len(self.indices)-1)
+            self.idx = random.randint(0, len(self.indices)-1) #ran
 
 
     def reshape(self, bottom, top):
@@ -78,7 +78,7 @@ class VOCSegDataLayer(caffe.Layer):
 
         # pick next input
         if self.random:
-            self.idx = random.randint(0, len(self.indices)-1)
+            self.idx = random.randint(0, len(self.indices)-1) #random number betweem 0 and len(self.indices)-1, use randint method.Edit by zhengzibing.
         else:
             self.idx += 1
             if self.idx == len(self.indices):
@@ -99,9 +99,9 @@ class VOCSegDataLayer(caffe.Layer):
         """
         im = Image.open('{}/JPEGImages/{}.jpg'.format(self.voc_dir, idx))
         in_ = np.array(im, dtype=np.float32)
-        in_ = in_[:,:,::-1]
+        in_ = in_[:,:,::-1] #RGB->BGR
         in_ -= self.mean
-        in_ = in_.transpose((2,0,1))
+        in_ = in_.transpose((2,0,1)) #to CxHxW
         return in_
 
 
@@ -112,7 +112,7 @@ class VOCSegDataLayer(caffe.Layer):
         """
         im = Image.open('{}/SegmentationClass/{}.png'.format(self.voc_dir, idx))
         label = np.array(im, dtype=np.uint8)
-        label = label[np.newaxis, ...]
+        label = label[np.newaxis, ...] #add a dimension
         return label
 
 
