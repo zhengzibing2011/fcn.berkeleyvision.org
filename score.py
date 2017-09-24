@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import division #from python's module __future__ import division, so we can implement accurate divison,such as 3/4=0.75.If not, 3/4=0
 import caffe
 import numpy as np
 import os
