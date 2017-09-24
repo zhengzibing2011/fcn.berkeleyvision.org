@@ -15,7 +15,7 @@ def transplant(new_net, net, suffix=''):
 
     Both  `net` to `new_net` arguments must be instantiated `caffe.Net`s.
     """
-    for p in net.params:
+    for p in net.params: # the output of net.params are layer_names that have params
         p_new = p + suffix
         if p_new not in new_net.params:
             print 'dropping', p
