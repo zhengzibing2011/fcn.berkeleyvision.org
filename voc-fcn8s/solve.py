@@ -7,7 +7,7 @@ import sys
 
 try:
     import setproctitle
-    setproctitle.setproctitle(os.path.basename(os.getcwd()))
+    setproctitle.setproctitle(os.path.basename(os.getcwd())) #os.path.basename(_file_):get the current file's name. os.getcwd():get the current working directory
 except:
     pass
 
