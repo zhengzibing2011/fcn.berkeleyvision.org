@@ -2,7 +2,7 @@ from __future__ import division
 import caffe
 import numpy as np
 
-def transplant(new_net, net, suffix=''):
+def transplant(new_net, net, suffix=''): #when encountering voc-fcn32s, shuld use transplant method.new_net refers to solver.net;net refers to vgg_net, whis obtained by caffe.Net(vgg_proto,vgg_weights,caffe.TRAIN)
     """
     Transfer weights by copying matching parameters, coercing parameters of
     incompatible shape, and dropping unmatched parameters.
@@ -15,7 +15,7 @@ def transplant(new_net, net, suffix=''):
 
     Both  `net` to `new_net` arguments must be instantiated `caffe.Net`s.
     """
-    for p in net.params: # the output of net.params are layer_names that have params
+    for p in net.params: # p is the layer_name of net.params, net refers to vgg_net. 
         p_new = p + suffix
         if p_new not in new_net.params:
             print 'dropping', p
