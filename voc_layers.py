@@ -32,7 +32,7 @@ class VOCSegDataLayer(caffe.Layer):
             split="val")
         """
         # config
-        params = eval(self.param_str) #change str to list, dict or tuple.Edit by zhengzibing
+        params = eval(self.param_str) #将train.prototxt中的param_str(字符串)转换成字典
         self.voc_dir = params['voc_dir']
         self.split = params['split']
         self.mean = np.array(params['mean'])
@@ -58,8 +58,8 @@ class VOCSegDataLayer(caffe.Layer):
 
         # randomization: seed and pick
         if self.random:
-            random.seed(self.seed)
-            self.idx = random.randint(0, len(self.indices)-1) #ran
+            random.seed(self.seed) #random.seed(5):相同的随机数种子产生相同的随机数
+            self.idx = random.randint(0, len(self.indices)-1) #若random为True，则执行random.seed(self.seed)后，random.randint(0,len(self.indices)-1)每次产生相同的随机数。
 
 
     def reshape(self, bottom, top):
