@@ -47,7 +47,7 @@ def interp(net, layers):
     """
     Set weights of each layer in layers to bilinear kernels for interpolation.
     """
-    for l in layers:
+    for l in layers: #layers = [k for k in solver.net.params.keys() if 'up' in k]即layers=upsocre
         m, k, h, w = net.params[l][0].data.shape
         if m != k and k != 1:
             print 'input + output channels need to be the same or |output| == 1'
